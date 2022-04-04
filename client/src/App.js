@@ -1,9 +1,20 @@
-import './App.css';
+import { Route, Routes } from "react-router-dom";
 
+//Rutas
+import Home from "./page/Home";
+import Principal from "./page/Principal";
+import Detalle from "./page/Detalle";
+import AddRaza from "./components/Crear_Raza";
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/My_Dogs" element={<Principal />} />
+        <Route path="/Description-of-My-dog/:id" element={<Detalle />} />
+        <Route path="/Add_Dog" element={<AddRaza />} />
+        <Route path="*" element={<h1>Error de pagina</h1>} />
+      </Routes>
     </div>
   );
 }
