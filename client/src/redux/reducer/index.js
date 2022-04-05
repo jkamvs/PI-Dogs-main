@@ -24,12 +24,13 @@ const rootReducer = (state = initialState, action) => {
                 createTempFilter: [...action.payload],
                 tempFilter: [...action.payload],
             };
-        ////dogs/id////
+        ////dogs?name=Raza////
+
         case GET_ALL_DOGS_QUERY:
             return {
-                ...state, dogQuery: action.payload,
+                ...state, dogs: action.payload,
             };
-        ////dogs?Raza////
+        ////dogs/id////
         case GET_ALL_DOGS_PARAM:
             return {
                 ...state, dog: action.payload,
@@ -50,7 +51,7 @@ const rootReducer = (state = initialState, action) => {
             } else {
                 let dato = allDogs;
                 let as = []
-                dato.map(item => {
+                dato.forEach(item => {
                     if (item.temperament) {
                         if (item.temperament.includes(action.payload)) {
                             as.push(item);

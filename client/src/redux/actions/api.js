@@ -14,7 +14,8 @@ export const urlDogsId = async (id) => {
     try {
         return await axios
             .get(`http://localhost:3001/dogs/${id}`)
-            .then((res) => res.data);
+            .then((res) => res.data)
+            .catch(e=>`El valor ingresado no es el correcto ${e}`)
     } catch (error) {
         console.log(error);
     }
@@ -44,7 +45,7 @@ export const filtroRaza = (url, valor) => {
     try {
         if (valor === 'Existentes') {
             let dato = [];
-            url.map(item => {
+            url.forEach(item => {
                 if (item.id < 1000) {
                     dato.push(item)
                 }
@@ -52,7 +53,7 @@ export const filtroRaza = (url, valor) => {
             return dato;
         } else if (valor === 'Agregada') {
             let dato = [];
-            url.map(item => {
+            url.forEach(item => {
                 if (item.id > 1000) {
                     dato.push(item)
                 }

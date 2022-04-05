@@ -26,10 +26,25 @@ export const getAllDogs = () => async (dispatch) => {
 ///////////////////Las Razas de DOGS
 export const getDogRaza = (raza) => async (dispatch) => {
     try {
-        let dogs = await urlDogsRaza(raza);
-        return dispatch({
-            type: GET_ALL_DOGS_QUERY, payload: dogs,
-        });
+        let dogsAll = await  urlDogs();
+        let bool =false;
+        dogsAll.forEach(item=>{
+            if(item.name.includes(raza)){
+                bool = true
+            }
+        })
+        if(bool){
+            let dogs = await urlDogsRaza(raza);
+            return dispatch({
+                type: GET_ALL_DOGS_QUERY, payload: dogs,
+            });
+        }else{
+
+            return dispatch({
+                type: GET_ALL_DOGS_QUERY, payload: dogsAll,
+            });
+        }
+
     } catch (err) {
         console.log(err);
     }
