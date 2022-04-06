@@ -5,13 +5,14 @@ import {
     GET_ALL_TEMPERAMENT,
     GET_TEMP_FILTER,
     GET_RAZA_FILTER,
-    GET_ALPHABETICAL, GET_WEIGHT_METRIC
+    GET_ALPHABETICAL, GET_WEIGHT_METRIC, ADD_DOGS
+
 } from "../actions/index";
 import {FiltroAbc, filtroRaza, metricoDatos} from "../actions/api";
 
 
 const initialState = {
-    dogsAll: [], dogs: [], createTempFilter: [], tempFilter: [], dog: {}, temp: [],weight:[], dogQuery:[]
+    dogsAll: [], dogs: [], createTempFilter: [], tempFilter: [], dog: {}, temp: [], weight: [], dogQuery: []
 };
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -39,6 +40,11 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_TEMPERAMENT:
             return {
                 ...state, temp: action.payload
+            };
+        case ADD_DOGS:
+            const todos = [...state.createTempFilter];
+            return {
+                ...state, dogs: todos
             };
         case GET_TEMP_FILTER:
             const allDogs = [...state.createTempFilter];
@@ -108,7 +114,7 @@ const rootReducer = (state = initialState, action) => {
                     tempFilter: allDogsTres,
                 }
             } else {
-                metricoDatos(perroFil,action.payload)
+                metricoDatos(perroFil, action.payload)
                 return {
                     ...state,
                     dogs: perroFil,

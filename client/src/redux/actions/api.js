@@ -15,7 +15,7 @@ export const urlDogsId = async (id) => {
         return await axios
             .get(`http://localhost:3001/dogs/${id}`)
             .then((res) => res.data)
-            .catch(e=>`El valor ingresado no es el correcto ${e}`)
+            .catch(e => `El valor ingresado no es el correcto ${e}`)
     } catch (error) {
         console.log(error);
     }
@@ -142,4 +142,20 @@ export const metricoDatos = (url, valor) => {
     } catch (e) {
         console.log(e)
     }
+}
+////////////////////Agregar perro
+export const addDogDb =  ({name,minimoAltura,maximoAltura,minimoPeso,maximoPeso,lifeSpan}) => {
+    try {
+        return  axios
+            .post('http://localhost:3001/dog', {
+                name: name,
+                height: `${minimoAltura} - ${maximoAltura}`,
+                weight: `${minimoPeso} - ${maximoPeso}`,
+                life_span: `${lifeSpan} years`,
+                temp: ["Bossy", "Loyal"]
+            })
+    } catch (e) {
+        console.log(e)
+    }
+
 }

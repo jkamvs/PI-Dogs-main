@@ -1,5 +1,5 @@
 /// link de la api creada
-import {urlDogs, urlDogsRaza, urlDogsId, urlTemp} from "./api";
+import {urlDogs, urlDogsRaza, urlDogsId, urlTemp, addDogDb} from "./api";
 
 //data
 export const GET_ALL_DOGS = "GET_ALL_DOGS";
@@ -10,7 +10,7 @@ export const GET_TEMP_FILTER = "GET_TEMP_FILTER";
 export const GET_RAZA_FILTER = "GET_RAZA_FILTER";
 export const GET_ALPHABETICAL = "GET_ALPHABETICAL";
 export const GET_WEIGHT_METRIC = "GET_WEIGHT_METRIC";
-
+export  const ADD_DOGS='ADD_DOGS';
 ////////////////Todos los datos de  DOGS
 export const getAllDogs = () => async (dispatch) => {
     try {
@@ -26,19 +26,19 @@ export const getAllDogs = () => async (dispatch) => {
 ///////////////////Las Razas de DOGS
 export const getDogRaza = (raza) => async (dispatch) => {
     try {
-        let dogsAll = await  urlDogs();
-        let bool =false;
-        dogsAll.forEach(item=>{
-            if(item.name.includes(raza)){
+        let dogsAll = await urlDogs();
+        let bool = false;
+        dogsAll.forEach(item => {
+            if (item.name.includes(raza)) {
                 bool = true
             }
         })
-        if(bool){
+        if (bool) {
             let dogs = await urlDogsRaza(raza);
             return dispatch({
                 type: GET_ALL_DOGS_QUERY, payload: dogs,
             });
-        }else{
+        } else {
 
             return dispatch({
                 type: GET_ALL_DOGS_QUERY, payload: dogsAll,
@@ -91,8 +91,20 @@ export const getAlphabetical = (payload) => {
 }
 export const getMetrica = (payload) => {
     return {
-        type: GET_WEIGHT_METRIC,
-        payload
+        type: GET_WEIGHT_METRIC, payload
 
     }
+}
+export const agregarPerro = ({name, minimoAltura, maximoAltura, minimoPeso, maximoPeso, lifeSpan}) => {
+    addDogDb({
+        name,
+        minimoAltura,
+        maximoAltura,
+        minimoPeso,
+        maximoPeso,
+        lifeSpan})
+    return {
+        type:ADD_DOGS
+    }
+
 }

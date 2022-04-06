@@ -3,17 +3,20 @@ import {Link} from "react-router-dom";
 
 
 export default function Card({id, name, temp, imagen, weight}) {
-
+    let temper=''
+    if(temp.length===0){
+        temper='No tiene temperamento'
+    }
     return (
         <div>
             <div >
                 <Link  to={`/Description-of-My-dog/${id}`}>
                     <h2 >{name}</h2>
                 </Link>
-                <p>{id}</p>
+
                 <p >{temp}</p>
-                <p >Imperial: {`${weight.imperial[0]} - ${weight.imperial[1]}`}</p>
-                <p >Metric: {`${weight.metric[0]} - ${weight.metric[1]}`}</p>
+                <p >weight: {weight}</p>
+
             </div>
         </div>
         /*<div style={{backgroundImage: `url(${imagen})`}} className={style_Card.card}>

@@ -1,6 +1,5 @@
 import {useState} from "react";
-import {useDispatch,
-   // useSelector
+import {useDispatch
 } from "react-redux";
 import {getDogRaza} from "../../redux/actions";
 

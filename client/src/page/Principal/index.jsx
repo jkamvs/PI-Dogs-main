@@ -5,6 +5,7 @@ import Cards from "../../components/Cards";
 import Pagination from "../../components/Pagination";
 import Filtro_Select from "../../components/Filtro_Select";
 import Search from "../../components/Search";
+import {Link} from "react-router-dom";
 
 
 const Principal = () => {
@@ -33,10 +34,11 @@ const Principal = () => {
     ////////////////////////////////////////////
     return (<>
         <h1>Perros Dogs</h1>
+        <Link to={"/Add_Dog"}>Crear perro</Link>
         <hr/>
-        <Search />
+        <Search/>
         <hr/>
-        <Filtro_Select  setDbDogs={setDbDogs}/>
+        <Filtro_Select setDbDogs={setDbDogs}/>
         <hr/>
         <div>
             <Pagination handlePaginado={handlePaginado} setDbDogs={setDbDogs}/>
@@ -48,7 +50,7 @@ const Principal = () => {
                 id={dog.id}
                 name={dog.name}
                 temp={dog.temperament}
-                imagen={dog.image.url}
+                imagen={dog.image ? dog.image.url : "https://st2.depositphotos.com/2222024/5609/i/600/depositphotos_56093859-stock-photo-happy-little-orange-havanese-puppy.jpg"}
                 weight={dog.weight}
             />))}
         </div>

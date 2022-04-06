@@ -1,15 +1,17 @@
-const { databaseDogs } = require("./index");
+//const { databaseDogs } = require("./index");
 const { Temperamento } = require("../db");
+const {databaseMejoradoAPI} = require("./dog.controllers");
 let dogstemp = [];
 
 let dogsTems = async () => {
-  let dato = await databaseDogs(); //Cargo todos los datos de la base de datos
+
+  let dato = await databaseMejoradoAPI(); //Cargo todos los datos de la base de datos
   await dato.map((item) => {
     //Recorro los datos por map para ver el objeto
     if (item.temperament) {
       //Valido si los datos no tienen nungun null
-      let arr = item.temperament.split(", "); // Convierto en arreglo los datos de temperamento
-      arr.map((index) => {
+      let arr = item.temperament;  // .split(", ") Convierto en arreglo los datos de temperamento
+      arr.map((index) => { 
         //Recorro denuevo pero los arreglos que he creado de cada temperamento
         if (!dogstemp.includes(index))
           //valido si dogstemp no tenga ningun temperamento
