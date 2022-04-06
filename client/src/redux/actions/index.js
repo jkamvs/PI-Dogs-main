@@ -95,14 +95,14 @@ export const getMetrica = (payload) => {
 
     }
 }
-export const agregarPerro = ({name, minimoAltura, maximoAltura, minimoPeso, maximoPeso, lifeSpan}) => {
+export const agregarPerro = ({name, minimoAltura, maximoAltura, minimoPeso, maximoPeso, lifeSpan,selectBD}) => {
     addDogDb({
         name,
         minimoAltura,
         maximoAltura,
         minimoPeso,
         maximoPeso,
-        lifeSpan})
+        lifeSpan,selectBD})
     return {
         type:ADD_DOGS
     }

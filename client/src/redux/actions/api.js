@@ -46,6 +46,7 @@ export const filtroRaza = (url, valor) => {
         if (valor === 'Existentes') {
             let dato = [];
             url.forEach(item => {
+
                 if (item.id < 1000) {
                     dato.push(item)
                 }
@@ -54,12 +55,12 @@ export const filtroRaza = (url, valor) => {
         } else if (valor === 'Agregada') {
             let dato = [];
             url.forEach(item => {
-                if (item.id > 1000) {
+                let cn = item.id;
+                if (typeof  cn === 'string') {
                     dato.push(item)
                 }
             })
             return dato;
-
         }
     } catch (e) {
         console.log(e)
@@ -144,15 +145,15 @@ export const metricoDatos = (url, valor) => {
     }
 }
 ////////////////////Agregar perro
-export const addDogDb =  ({name,minimoAltura,maximoAltura,minimoPeso,maximoPeso,lifeSpan}) => {
+export const addDogDb = ({name, minimoAltura, maximoAltura, minimoPeso, maximoPeso, lifeSpan, selectBD}) => {
     try {
-        return  axios
+        return axios
             .post('http://localhost:3001/dog', {
                 name: name,
                 height: `${minimoAltura} - ${maximoAltura}`,
                 weight: `${minimoPeso} - ${maximoPeso}`,
                 life_span: `${lifeSpan} years`,
-                temp: ["Bossy", "Loyal"]
+                temp: selectBD
             })
     } catch (e) {
         console.log(e)

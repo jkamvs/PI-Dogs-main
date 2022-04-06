@@ -7,7 +7,9 @@ export default function Filtro_Select({setDbDogs}) {
     ///Dispatch reducer
     const dispatch = useDispatch();
     /////Reducer
-    const tempRedux = useSelector((state) => state.temp);
+    const tempRedux = useSelector(
+        (state) => state.temp
+    );
 
     /////////Effect
     useEffect(() => {
