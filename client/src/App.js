@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-
+import './App.css'
 //Rutas
 import Home from "./page/Home";
 import Principal from "./page/Principal";

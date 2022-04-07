@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useDispatch
 } from "react-redux";
 import {getDogRaza} from "../../redux/actions";
-
+import style_css  from './styles.module.css'
 export default function Search() {
     const [searchRaza, setSearchRaza] = useState('')
     const dispatch = useDispatch();
@@ -21,13 +21,14 @@ export default function Search() {
        let dato = mayusculaSearch(e.target.value)
         setSearchRaza(dato)
     }
-    return (<>
+    return (<div>
         <input
+            className={style_css.search}
             type={'text'}
             placeholder={'Search'}
             value={searchRaza}
             onChange={(e) => handleChange(e)}
         />
-        <button onClick={buscar}>Buscar</button>
-    </>)
+        <button className={style_css.btnSearch} onClick={buscar}>Buscar</button>
+    </div>)
 }

@@ -6,7 +6,7 @@ import Pagination from "../../components/Pagination";
 import Filtro_Select from "../../components/Filtro_Select";
 import Search from "../../components/Search";
 import {Link} from "react-router-dom";
-
+import style_css from './styles.module.css'
 
 const Principal = () => {
     ///UseState
@@ -33,27 +33,19 @@ const Principal = () => {
     }
     ////////////////////////////////////////////
     return (<>
-        <h1>Perros Dogs</h1>
-        <Link to={"/Add_Dog"}>Crear perro</Link>
-        <hr/>
-        <Search/>
-        <hr/>
+        <div className={style_css.titleNav}>
+            <h1>Perros Dogs</h1>
+        </div>
+
+        <div className={style_css.nav}>
+            <Link to={"/Add_Dog"} className={style_css.btnAdd}>NEW DOG</Link>
+            <Search/>
+        </div>
+
+
         <Filtro_Select setDbDogs={setDbDogs}/>
-        <hr/>
-        <div>
-            <Pagination handlePaginado={handlePaginado} setDbDogs={setDbDogs}/>
-        </div>
-        <hr/>
-        <div>
-            {datadb?.map((dog) => (<Cards
-                key={dog.id}
-                id={dog.id}
-                name={dog.name}
-                temp={dog.temperament}
-                imagen={dog.image ? dog.image.url : "https://st2.depositphotos.com/2222024/5609/i/600/depositphotos_56093859-stock-photo-happy-little-orange-havanese-puppy.jpg"}
-                weight={dog.weight}
-            />))}
-        </div>
+        <Pagination handlePaginado={handlePaginado} setDbDogs={setDbDogs} dbDogs={dbDogs}/>
+        <Cards datadb={datadb}/>
     </>);
 };
 export default Principal;

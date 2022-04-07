@@ -1,0 +1,26 @@
+.search {
+    width: 65%;
+    outline: none;
+    border: 0px;
+    padding: 10px;
+    border: 1px solid #fff;
+    background-color: #EFEFEF;
+}
+
+.search:hover {
+    border: 1px solid #B8860B;
+}
+
+.search:active {
+    border: 1px solid #B8860B;
+    outline: #B8860B;
+}
+
+.btnSearch {
+    border: 0px;
+    padding: 10px;
+    outline: none;
+    background-color: #B8860B;
+    color: white;
+    cursor: pointer;
+}

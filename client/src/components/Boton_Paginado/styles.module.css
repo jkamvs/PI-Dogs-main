@@ -1,0 +1,18 @@
+.btn {
+
+    border: 0px;
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.btn:hover {
+    background-color: #ddd;
+}
+
+.activo {
+    color: white;
+    border: 0px;
+    background-color: #B8860B;
+    cursor: pointer;
+    padding: 8px 16px;
+}

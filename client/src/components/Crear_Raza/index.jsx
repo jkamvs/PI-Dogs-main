@@ -62,9 +62,7 @@ export default function Crear_Raza() {
         }
         setSelect(dato)
     }
-
     const handleData = (e) => {
-
         dispatch(agregarPerro({
             name, minimoAltura, maximoAltura, minimoPeso, maximoPeso, lifeSpan,selectBD
         }))
