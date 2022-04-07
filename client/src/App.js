@@ -4,7 +4,7 @@ import './App.css'
 import Home from "./page/Home";
 import Principal from "./page/Principal";
 import Detalle from "./page/Detalle";
-import AddRaza from "./components/Crear_Raza";
+import AddRaza from "./page/Crear_Raza";
 function App() {
   return (
     <div className="App">

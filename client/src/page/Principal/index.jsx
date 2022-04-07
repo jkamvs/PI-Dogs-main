@@ -20,8 +20,13 @@ const Principal = () => {
         dispatch(getAllDogs())
     }, [dispatch])
     //////////////////
+    let datadb=[]
+    if(dogsRedux.length===1){
+        datadb=[...dogsRedux]
+    }else{
+        datadb = dogsRedux.slice(dbDogs - 1, dbDogs + 7)
+    }
 
-    let datadb = dogsRedux.slice(dbDogs - 1, dbDogs + 7)
     ////////////////////////////Para el Paginado
     let handlePaginado = () => {
         let contadorArr = [];
@@ -34,7 +39,7 @@ const Principal = () => {
     ////////////////////////////////////////////
     return (<>
         <div className={style_css.titleNav}>
-            <h1>Perros Dogs</h1>
+            <h1>MY DOGS</h1>
         </div>
 
         <div className={style_css.nav}>

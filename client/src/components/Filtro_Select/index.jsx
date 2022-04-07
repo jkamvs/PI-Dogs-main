@@ -50,12 +50,11 @@ export default function Filtro_Select({setDbDogs}) {
                 <option value={'Acendente'}>A - Z</option>
                 <option value={'Decendente'}>Z - A</option>
             </select>
-            <select className={style_css.select}  name="Metrica"onChange={(e)=>handleMetrica(e)}>
+            <select className={style_css.select}  name="Weight" onChange={(e)=>handleMetrica(e)}>
                 <option value={'All weight'}>All Weight</option>
-                <option value={'Imperial 1 - 9'}>Imperial 1 - 9</option>
-                <option value={'Imperial 9 - 1'}>Imperial 9 - 1</option>
-                <option value={'Metrica 1 - 9'}>Metrica 1 - 9</option>
-                <option value={'Metrica 9 - 1'}>Metrica 9 - 1</option>
+                <option value={'Weight 1 - 9'}>Weight 1 - 9</option>
+                <option value={'Weight 9 - 1'}>Weight 9 - 1</option>
+   \
             </select>
         </div>
 

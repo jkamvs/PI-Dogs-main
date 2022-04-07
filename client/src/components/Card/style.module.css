@@ -21,6 +21,10 @@
     text-align: center;
     color: white;
 }
+.hr{
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
 .a{
     text-align: right;
     text-decoration: none;

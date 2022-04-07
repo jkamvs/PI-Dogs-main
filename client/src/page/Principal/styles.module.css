@@ -3,11 +3,14 @@
     height: 50px;
     background-color: #B8860B;
     margin-bottom: 20px;
+    display: flex;
 }
 .titleNav h1{
     color: white;
-    margin: 10px;
-    font-size: 37px;
+    margin: 0px 0px 10px 50px;
+    font-size: 40px;
+    font-family:  "Roboto Light";
+    font-weight: 400;
 }
 
 .nav{

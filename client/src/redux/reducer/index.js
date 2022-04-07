@@ -41,11 +41,13 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state, temp: action.payload
             };
+        ///////////////////////Agregar perro//////////////////////////////////////
         case ADD_DOGS:
             const todos = [...state.createTempFilter];
             return {
                 ...state, dogs: todos
             };
+        ////////////////////////Temperamento filter///////////////////////////
         case GET_TEMP_FILTER:
             const allDogs = [...state.createTempFilter];
             if (action.payload === "All Temp") {
@@ -70,8 +72,9 @@ const rootReducer = (state = initialState, action) => {
                     tempFilter: as,
                 }
             }
+        ////////////////////////////////////////////////
         case GET_RAZA_FILTER:
-            const allDogsDos = [...state.createTempFilter];
+            const allDogsDos = [...state.dogsAll];
             if (action.payload === 'All Data') {
                 return {
                     ...state,
@@ -83,9 +86,10 @@ const rootReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     dogs: data,
-                    tempFilter: data,
+                    createTempFilter: data,
                 }
             }
+        //////////////////////////////////////////////////////////////
         case GET_ALPHABETICAL:
             const perro = [...state.dogs]
             if (action.payload === 'All Data Base') {
@@ -103,6 +107,7 @@ const rootReducer = (state = initialState, action) => {
                     tempFilter: perro,
                 }
             }
+        //////////////////////////////////////////////////////////////
         case GET_WEIGHT_METRIC:
             const perroFil = [...state.dogs]
 

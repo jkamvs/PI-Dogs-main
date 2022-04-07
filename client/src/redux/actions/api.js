@@ -97,44 +97,22 @@ export const FiltroAbc = (url, valor) => {
 //////////////////Datos del peso metrico
 export const metricoDatos = (url, valor) => {
     try {
-        if (valor === 'Imperial 1 - 9') {
+        if (valor === 'Weight 1 - 9') {
             url.sort((a, b) => {
-                if (b.weight.metric === a.weight.metric) {
+                if (a.weight === b.weight) {
                     return 0
                 }
-                if (b.weight.metric < a.weight.metric) {
+                if (a.weight < b.weight) {
                     return -1
                 }
                 return 1
             });
-        } else if (valor === 'Imperial 9 - 1') {
+        } else if (valor === 'Weight 9 - 1') {
             url.sort((a, b) => {
-                if (a.weight.metric === b.weight.metric) {
+                if (b.weight === a.weight) {
                     return 0
                 }
-                if (a.weight.metric < b.weight.metric) {
-                    return -1
-                }
-                return 1
-            });
-        } else if (valor === 'Metrica 1 - 9') {
-            url.sort((a, b) => {
-
-                if (a.weight.imperial[0] === b.weight.imperial[0]) {
-                    return 0
-                }
-                if (a.weight.imperial[0] < b.weight.imperial[0]) {
-                    return -1
-                }
-                return 1
-            });
-        } else if (valor === 'Metrica 9 - 1') {
-            url.sort((a, b) => {
-
-                if (b.weight.imperial[0] === a.weight.imperial[0]) {
-                    return 0
-                }
-                if (b.weight.imperial[0] < a.weight.imperial[0]) {
+                if (b.weight < a.weight) {
                     return -1
                 }
                 return 1
