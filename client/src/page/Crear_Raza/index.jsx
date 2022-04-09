@@ -26,9 +26,10 @@ export default function Crear_Raza() {
     useEffect(() => {
         dispatch(getTemp())
     }, [dispatch]);
-    //////////////////////////////
-    const mayusculaSearch = (as) => {
 
+    //////////////////////////////
+    /**FUNCION PARA VALIDAR EL MAYUS */
+    const mayusculaSearch = (as) => {
         let arr = as.split(' ');
         let datoArr = [];
         arr.forEach((item) => {
@@ -36,146 +37,39 @@ export default function Crear_Raza() {
         });
         return datoArr.join(" ");
     }
-    const handleinputChange = (inputName, inputValue) => {
-        setDatos({
-            ...datos, [inputName]: mayusculaSearch(inputValue)
-        })
-        if (inputName === 'name') {
-            if (/[1-9]/.test(inputValue)) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'No se permiten numeros o símbolos',
-                })
-            }/* else if (/\W/.test(inputValue)) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'No se permiten numeros o símbolos',
-                })
-            }*/ else if (/[A-Z a-z]|\s/.test(inputValue)) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-                if (inputValue.length > 3) {
-                    setErrorDatos({
-                        [`error${inputName}`]: ''
-                    })
-                } else if (inputValue.length > 0) {
-                    setErrorDatos({
-                        [`error${inputName}`]: 'Ingrese una raza mayor a 3 digitos',
-                    })
-                } else if (inputValue.length === 0) {
-                    setErrorDatos({
-                        [`error${inputName}`]: 'Ingrese la nueva raza',
-                    })
-                }
-            }
-        } else if (inputName === 'minimoAltura') {
-            if (inputValue > 4) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (inputValue === 0 || inputValue === '') {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese la nueva raza',
-                })
-            } else if (inputValue < 5) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese un numero mayor a 5',
-                })
-            }
-        } else if (inputName === 'maximoAltura') {
-            if (inputValue === 0 || inputValue === '') {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (datos.minimoAltura === 0 || datos.minimoAltura === '') {
+    /** CREANDO LA FUNCION PARA VALIDAR ERRORES */
+    const validate = (datos) => {
+        let errors ={};
+        
+        if(!datos.name) errors.name = 'Necesitamos colocar un raza a tu perro';
+        if(/[1-9]/.test(datos.name)) errors.name = 'No se permite numeros';
+        if(/[^\w\s]/.test(datos.name)) errors.name = 'No se permite caracter';
+        if(datos.minimoAltura < 5) errors.minimoAltura='Necesita colocar la altura minima';
+        if(datos.maximoAltura !== '' && +datos.minimoAltura >= +datos.maximoAltura ) errors.minimoAltura = 'El valor debe de ser menor al maximo'
+        if(datos.minimoPeso < 5) errors.minimoPeso='Necesita colocar el peso minima';
+        if(datos.maximoPeso !== '' && +datos.minimoPeso >= +datos.maximoPeso ) errors.maximoPeso = 'El valor debe de ser menor al maximo'
+        if(datos.minimoLifeSpan < 5) errors.minimoLifeSpan='Necesita colocar la vida minima';
+        if(datos.maximoLifeSpan !== '' && +datos.minimoLifeSpan >= +datos.maximoLifeSpan ) errors.minimoLifeSpan = 'El valor debe de ser menor al maximo'
 
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese primero un valor en el minimo'
-                })
-
-            } else if (datos.minimoAltura < inputValue) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (datos.minimoAltura >= inputValue) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese un numero mayor al minimo'
-                })
-            }
-        } else if (inputName === 'minimoPeso') {
-            if (inputValue > 4) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (inputValue === 0 || inputValue === '') {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese el peso',
-                })
-            } else if (inputValue < 5) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese un numero mayor a 5',
-                })
-            }
-        } else if (inputName === 'maximoPeso') {
-            if (inputValue === 0 || inputValue === '') {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (datos.minimoPeso === 0 || datos.minimoPeso === '') {
-
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese primero un valor en el minimo'
-                })
-
-            } else if (datos.minimoPeso >= inputValue) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese un numero mayor al minimo'
-                })
-            } else if (datos.minimoPeso < inputValue) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            }
-        } else if (inputName === 'minimoLifeSpan') {
-            if (inputValue > 6) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (inputValue === 0 || inputValue === '') {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese el año de vida',
-                })
-            } else if (inputValue < 7) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese un numero mayor a 7',
-                })
-            }
-        } else if (inputName === 'maximoLifeSpan') {
-            if (inputValue === 0 || inputValue === '') {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (datos.minimoLifeSpan === 0 || datos.minimoLifeSpan === '') {
-
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese primero un valor en el minimo'
-                })
-
-            } else if (inputValue > 25) {
-                setErrorDatos({
-
-                    [`error${inputName}`]: 'Sobre pasa a la edad estimada de la raza actualmente conocida'
-                })
-            } else if (datos.minimoLifeSpan < inputValue) {
-                setErrorDatos({
-                    [`error${inputName}`]: ''
-                })
-            } else if (datos.minimoLifeSpan >= inputValue) {
-                setErrorDatos({
-                    [`error${inputName}`]: 'Ingrese un numero mayor al minimo'
-                })
-            }
-        }
+        return errors;
     }
+
+  
+
+    /**HANDLERS PARA LOS INPUTS, SETEANDO EL VALOR DEL ESTADO */
+    const handleinputChange = (e) => {
+       setDatos({
+           ...datos,
+           [e.target.name]: mayusculaSearch(e.target.value)
+       })
+       setErrorDatos(validate({
+               ...datos,
+               [e.target.name]: mayusculaSearch(e.target.value)
+           })
+       )
+    }
+
+    /**Handler temperaments */
     const handleTemp = (e) => {
         e.preventDefault();
         if (e.target.value !== "All Temp") {
@@ -191,6 +85,7 @@ export default function Crear_Raza() {
     }
 
     //////////////////////////////
+    /**CONTABILIZO CUANTO RECIBE EL SELECT Y LOS CONCATENO*/
     let news = ''
     for (let i = 0; i < selectBD.length; i++) {
         if (i === 0) {
@@ -201,6 +96,7 @@ export default function Crear_Raza() {
     }
 
     //////////////////////////////
+    /**PREPARAR DATOS PARA EL ENVIO */
     let heightData = '';
     if (datos.maximoAltura) {
         heightData = `${datos.minimoAltura} - ${datos.maximoAltura}`
@@ -222,10 +118,23 @@ export default function Crear_Raza() {
     let listoData = {
         name: datos.name, height: heightData, weight: weightData, life_span: lifeSpanData, temp: selectBD,
     }
+    
+    /**Handle para el boton */
     const handleData = (e) => {
-        dispatch(agregarPerro({listoData}))
-        console.log(listoData)
-        e.preventDefault()
+        e.preventDefault();
+        dispatch(agregarPerro({listoData}));
+        alert('Raza de perro creado');
+        setDatos({
+            name: '',
+            minimoAltura: '',
+            maximoAltura: '',
+            minimoPeso: '',
+            maximoPeso: '',
+            minimoLifeSpan: '',
+            maximoLifeSpan: ''
+        })
+        setSelect([]);
+     
     }
     //////////////////////////////
     useEffect(() => {
@@ -233,17 +142,18 @@ export default function Crear_Raza() {
             datos.minimoAltura === '' ||
             datos.minimoPeso === '' ||
             datos.minimoLifeSpan === '' ||
-            selectBD.length === 0) {
+            selectBD.length === 0 ||
+            errorDatos.hasOwnProperty('name') ||
+            errorDatos.hasOwnProperty('minimoAltura') ||
+            errorDatos.hasOwnProperty('maximoAltura') ||
+            errorDatos.hasOwnProperty('maximoPeso') ||
+            errorDatos.hasOwnProperty('minimoPeso') ||
+            errorDatos.hasOwnProperty('maximoLifeSpan') ||
+            errorDatos.hasOwnProperty('minimoLifeSpan')
+
+            ) {
             setDisableBtn(true)
-        } else if (
-            errorDatos.errorname === '' ||
-            errorDatos.errorminimoAltura === '' ||
-            errorDatos.errormaximoAltura === '' ||
-            errorDatos.errorminimoPeso === '' ||
-            errorDatos.errormaximoPeso == '' ||
-            errorDatos.errorminimoLifeSpan === '' ||
-            errorDatos.errormaximoLifeSpan == ''
-        ) {
+        } else {
             setDisableBtn(false)
         }
     }, [datos, errorDatos, errorSelectBD, selectBD, disableBtn])
@@ -261,13 +171,13 @@ export default function Crear_Raza() {
                     <p>Name:</p>
                     <input
                         className={style_css.inputText}
-                        type={'text'} name={'name'}
+                        type='text'
+                        name='name'
                         value={datos.name}
-                        placeholder={'Name Dog'}
-                        onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                        placeholder='Name Dog'
+                        onChange={(e) => handleinputChange(e)}
                     />
-                    {!errorDatos.errorname ? null :
-                        <span className={style_css.alertMensaje}>{errorDatos.errorname}</span>}
+                    {errorDatos.name && <p className={style_css.alertMensaje}>{errorDatos.name}</p>}
                 </label>
                 {/*Nombre del perron*/}
                 <label>
@@ -275,29 +185,26 @@ export default function Crear_Raza() {
                     <div className={style_css.inputMINMAX}>
                         <input
                             className={style_css.MINMAX}
-                            type={'number'}
-                            id={'minimoAltura'}
-                            name={"minimoAltura"}
-                            onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                            type='number'
+                            id='minimoAltura'
+                            name="minimoAltura"
+                            value={datos.minimoAltura}
+                            onChange={(e) => handleinputChange(e)}
                             placeholder={'MIN'}
                         />
                         <input
                             className={style_css.MINMAX}
-                            type={'number'}
-                            id={'maximoAltura'}
-                            name={"maximoAltura"}
-                            onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                            type='number'
+                            id='maximoAltura'
+                            name="maximoAltura"
+                            value= {datos.maximoAltura}
+                            onChange={(e) => handleinputChange(e)}
                             placeholder={'MAX'}
                         />
                     </div>
-                    {!errorDatos.errorminimoAltura ? null :
-                        <span className={style_css.alertMensaje}>{errorDatos.errorminimoAltura}</span>}
-                    {!errorDatos.errormaximoAltura ? null :
-
-                        <br/>}
-                    {!errorDatos.errormaximoAltura ? null :
-
-                        <span className={style_css.alertMensaje}>{errorDatos.errormaximoAltura}</span>}
+                    {errorDatos.minimoAltura && <p className={style_css.alertMensaje}>{errorDatos.minimoAltura}</p>}
+                    {errorDatos.maximoAltura && <p className={style_css.alertMensaje}>{errorDatos.maximoAltura}</p>}
+                 
                 </label>
                 {/*Nombre del perron*/}
                 <label>
@@ -308,7 +215,8 @@ export default function Crear_Raza() {
                             type={'number'}
                             id={'minimoPeso'}
                             name={"minimoPeso"}
-                            onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                            value={datos.minimoPeso}
+                            onChange={(e) => handleinputChange(e)}
                             placeholder={'MIN'}
                         />
                         <input
@@ -316,18 +224,13 @@ export default function Crear_Raza() {
                             type={'number'}
                             id={'maximoPeso'}
                             name={"maximoPeso"}
-                            onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                            value={datos.maximoPeso}
+                            onChange={(e) => handleinputChange(e)}
                             placeholder={'MAX'}
                         />
                     </div>
-                    {!errorDatos.errorminimoPeso ? null :
-                        <span className={style_css.alertMensaje}>{errorDatos.errorminimoPeso}</span>}
-                    {!errorDatos.errormaximoPeso ? null :
-
-                        <br/>}
-                    {!errorDatos.errormaximoPeso ? null :
-
-                        <span className={style_css.alertMensaje}>{errorDatos.errormaximoPeso}</span>}
+                    {errorDatos.minimoPeso && <p className={style_css.alertMensaje}>{errorDatos.minimoPeso}</p>}
+                    {errorDatos.maximoPeso && <p className={style_css.alertMensaje}>{errorDatos.maximoPeso}</p>}
                 </label>
                 <label>
                     <p>Años de vida:</p>
@@ -337,7 +240,8 @@ export default function Crear_Raza() {
                             type={'number'}
                             id={'minimoLifeSpan'}
                             name={"minimoLifeSpan"}
-                            onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                            value={datos.minimoLifeSpan}
+                            onChange={(e) => handleinputChange(e)}
                             placeholder={'MIN'}
                         />
                         <input
@@ -345,23 +249,22 @@ export default function Crear_Raza() {
                             type={'number'}
                             id={'maximoLifeSpan'}
                             name={"maximoLifeSpan"}
-                            onChange={(e) => handleinputChange(e.target.name, e.target.value)}
+                            value={datos.maximoLifeSpan}
+                            onChange={(e) => handleinputChange(e)}
                             placeholder={'MAX'}
                         />
                     </div>
-                    {!errorDatos.errorminimoLifeSpan ? null :
-                        <span className={style_css.alertMensaje}>{errorDatos.errorminimoLifeSpan}</span>}
-                    {!errorDatos.errormaximoLifeSpan ? null : <br/>}
-                    {!errorDatos.errormaximoLifeSpan ? null :
-                        <span className={style_css.alertMensaje}>{errorDatos.errormaximoLifeSpan}</span>}
+                    {errorDatos.minimoLifeSpan && <p className={style_css.alertMensaje}>{errorDatos.minimoLifeSpan}</p>}
+                    {errorDatos.maximoLifeSpan && <p className={style_css.alertMensaje}>{errorDatos.maximoLifeSpan}</p>}
                 </label>
                 <label>
                     <p>Temperamento:</p>
                     <select
+                        defaultValue={'All Temp'}
                         className={style_css.select}
                         name={'temperamentos'}
                         onChange={(e) => handleTemp(e)}>
-                        <option value='All Temp'>All Temperament</option>
+                        <option value='All Temp' disabled>All Temperament</option>
                         {tempRedux?.map(item => (<option
                             key={item.name}
                             value={item.name}
@@ -377,7 +280,7 @@ export default function Crear_Raza() {
                             {item}
                         </p>))}
                     </div>
-                    {!errorSelectBD ? null : <span className={style_css.alertMensaje}>{errorSelectBD}</span>}
+                    {errorSelectBD && <p className={style_css.alertMensaje}>{errorSelectBD}</p>}
                 </label>
                 <input
                     className={disableBtn ? style_css.btnactivo : style_css.btn}
