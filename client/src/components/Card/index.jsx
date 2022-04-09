@@ -27,7 +27,7 @@ export default function Card({id, name, temp, imagen, weight}) {
             <br/>
             <br/>
 
-            <Link className={style_css.a} to={`/Description-of-My-dog/${id}`}>
+            <Link className={style_css.a} to={`/Description-of-My-dog/${id}/${name}`}>
                 <p>{`<< Detalle >>`}</p>
             </Link>
         </div>

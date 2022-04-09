@@ -99,20 +99,20 @@ export const metricoDatos = (url, valor) => {
     try {
         if (valor === 'Weight 1 - 9') {
             url.sort((a, b) => {
-                if (a.weight === b.weight) {
+                if (Number(a.weight.split(' - ')[0]) === Number(b.weight.split(' - ')[0])) {
                     return 0
                 }
-                if (a.weight < b.weight) {
+                if (Number(a.weight.split(' - ')[0]) < Number(b.weight.split(' - ')[0])) {
                     return -1
                 }
                 return 1
             });
         } else if (valor === 'Weight 9 - 1') {
             url.sort((a, b) => {
-                if (b.weight === a.weight) {
+                if (Number(b.weight.split(' - ')[0]) === Number(a.weight.split(' - ')[0])) {
                     return 0
                 }
-                if (b.weight < a.weight) {
+                if (Number(b.weight.split(' - ')[0]) < Number(a.weight.split(' - ')[0])) {
                     return -1
                 }
                 return 1
@@ -123,15 +123,15 @@ export const metricoDatos = (url, valor) => {
     }
 }
 ////////////////////Agregar perro
-export const addDogDb = ({name, minimoAltura, maximoAltura, minimoPeso, maximoPeso, lifeSpan, selectBD}) => {
+export const addDogDb = ({listoData}) => {
     try {
         return axios
             .post('http://localhost:3001/dog', {
-                name: name,
-                height: `${minimoAltura} - ${maximoAltura}`,
-                weight: `${minimoPeso} - ${maximoPeso}`,
-                life_span: `${lifeSpan} years`,
-                temp: selectBD
+                name: listoData.name,
+                height: listoData.height,
+                weight: listoData.weight,
+                life_span: listoData.life_span,
+                temp: listoData.temp,
             })
     } catch (e) {
         console.log(e)

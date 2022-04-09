@@ -1,18 +1,52 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {getDogId} from "../../redux/actions";
-import {useParams} from "react-router-dom";
+import {getAllDogs, getDogId} from "../../redux/actions";
+import {Link, useParams} from "react-router-dom";
+import style_css from "./style.module.css";
 
 export default function Detalle() {
-  const {id}=useParams();
-  const dispatch = useDispatch();
-  const dogRedux = useSelector((state)=>state.dog);
-  useEffect(()=>{
-    dispatch(getDogId(id))
-  },[dispatch])
-  return (
-    <div>
-      <p>{dogRedux.temperament}</p>
-    </div>
-  )
+    const urldata = useParams();
+    const dispatch = useDispatch();
+    const dogRedux = useSelector((state) => state.dog);
+    const alldogs = useSelector((state) => state.dogs)
+    useEffect(() => {
+        dispatch(getDogId(urldata.id))
+        dispatch(getAllDogs())
+    }, [dispatch])
+    let datoid = {};
+    alldogs.forEach(item => {
+        if (item.id == urldata.id) {
+            datoid = item
+        }
+    })
+
+
+    return (<>
+        <div className={style_css.titleNav}>
+            <h1>DETALLE {urldata.id}</h1>
+            <Link className={style_css.link} to={'/My_Dogs'}>MY DOGS</Link>
+        </div>
+        <div className={style_css.container}>
+            <div className={style_css.img}>
+                <img
+                    src={datoid.image ? datoid.image.url : "https://st2.depositphotos.com/2222024/5609/i/600/depositphotos_56093859-stock-photo-happy-little-orange-havanese-puppy.jpg"}/>
+
+            </div>
+            <div className={style_css.detalle}>
+                <div className={style_css.font}>
+                    <p className={style_css.titleCard}>{urldata.nombre}</p>
+                    <p className={style_css.temp}>{dogRedux.temperament}</p>
+                    <br/>
+                    <p className={style_css.data}>Weight: {dogRedux.weight} kg</p>
+                    <br/>
+                    <p className={style_css.data}>Height: {dogRedux.height} cm</p>
+                    <br/>
+                    <p className={style_css.data}>Life {dogRedux.life_span}año.</p>
+                </div>
+
+            </div>
+        </div>
+
+
+    </>)
 }

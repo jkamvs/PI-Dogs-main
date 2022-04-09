@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/My_Dogs" element={<Principal />} />
-        <Route path="/Description-of-My-dog/:id" element={<Detalle />} />
+        <Route path="/Description-of-My-dog/:id/:nombre" element={<Detalle />} />
         <Route path="/Add_Dog" element={<AddRaza />} />
         <Route path="*" element={<h1>Error de pagina</h1>} />
       </Routes>

@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Beau+Rivage&display=swap');
+.titleNav {
+    width: 100%;
+    height: 50px;
+    background-color: #B8860B;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.titleNav h1 {
+    color: white;
+    margin: 0 0 10px 50px;
+    font-size: 40px;
+    font-family: "Roboto Light";
+    font-weight: 400;
+}
+
+.link{
+    color: white;
+    margin: 0 50px 10px 0;
+    font-size: 40px;
+    text-decoration: none;
+    font-family:  "Roboto Light" ;
+}
+.container{
+    width: 97%;
+    height: 85vh;
+    display: flex;
+    margin: 0 20px;
+    font-family: 'Beau Rivage', cursive;
+
+}
+.img{
+    width: 50%;
+    height: 100%;
+
+}
+.img img{
+    width: 100%;
+    height: 100%;
+}
+.detalle{
+    width:50% ;
+    height: 100%;
+    background-color: #dddddd;
+    padding: 30px;
+}
+.font{
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    padding: 30px;
+}
+.titleCard{
+    font-size: 60px;
+    font-weight: 400;
+    text-align: center;
+    padding-bottom: 20px ;
+}
+.temp{
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+}
+.data{
+    font-size: 25px;
+    padding-left: 30px;
+    font-weight: 400;
+}

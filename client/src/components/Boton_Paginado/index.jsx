@@ -4,7 +4,6 @@ import style_css from './styles.module.css'
 export default function Boton_Paginado({id, numero, setDbDogs, dbDogs}) {
     const handleMostrar = () => {
         setDbDogs(numero)
-
     }
     let bool = true
     if (dbDogs === numero) {
