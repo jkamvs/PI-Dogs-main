@@ -15,6 +15,17 @@ let databaseMejoradoAPI = async () => {
         }
         let cambioWeight = item.weight.metric;
         item.weight = cambioWeight
+
+        let array = item.weight.split(' - ');
+        let newdato = [];
+        if (array[0] === 'NaN') {
+            array.forEach((items) => {
+                if (items === 'NaN') newdato.push('0');
+                else newdato.push(items);
+            });
+            item.weight = newdato.join(' - ');
+        }
+
         let cambioHeight = item.height.metric;
         item.height = cambioHeight
     })
@@ -42,9 +53,9 @@ let databaseMejoradoDB = async () => {
 }
 ////////////////Funcion de llamado a todos los datos /////////////////
 let dogAll = async () => {
-    const v1 = await databaseMejoradoAPI();
-    const v2 = await databaseMejoradoDB();
-    dogs = await [...v1, ...v2];
+    const infoApi = await databaseMejoradoAPI();
+    const infoDb = await databaseMejoradoDB();
+    dogs = await [...infoApi, ...infoDb];
     return dogs;
 };
 ////////////////Funcion de filtrado por query para traer a la raza/////////////
@@ -62,18 +73,16 @@ let dogName = async (name) => {
 };
 ///////////////////////////////////////////////////////////////
 let dogId = async (id) => {
-    const v1 = await dogAll();
-    let idRaza = await v1.filter((item) => {
-        if (item.id == id) {
-            return item;
-        }
-    });
-    let detalle = await {
-        weight: idRaza[0].weight,
-        temperament: idRaza[0].temperament,
-        height: idRaza[0].height,
+    let v1 = await dogAll();
+    let razaBuscada = v1.find(item => item.id == id);
+    let detalle =  {
+        weight: razaBuscada.weight,
+        temperament: razaBuscada.temperament.join(', '),
+        height: razaBuscada.height,
+        life_span:razaBuscada.life_span,
     };
-    return detalle;
+      return detalle;
+    
 };
 let addDog = async ({name, height, weight, life_span, temp}) => {
     try {
