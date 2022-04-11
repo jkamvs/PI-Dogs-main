@@ -10,9 +10,14 @@
 .title{
     position: absolute;
     font-family: "Roboto Light";
+    background-color: #B8860B;
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 10px;
     font-size: 40px;
     top: 10%;
     left: 43%;
+    z-index: 2;
 }
 .card{
     width: 300px;
@@ -20,7 +25,7 @@
     position: absolute;
     top: 26%;
     left: 39%;
-
+    z-index: 1;
 }
 .card img{
     width: 100%;

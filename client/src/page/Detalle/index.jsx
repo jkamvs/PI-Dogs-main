@@ -17,7 +17,7 @@ export default function Detalle() {
     }, [dispatch])
     let datoid = {};
     alldogs.forEach(item => {
-        if (item.id == urldata.id) {
+        if (item.id === urldata.id) {
             datoid = item
         }
     })
