@@ -3,8 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {agregarPerro, getTemp} from "../../redux/actions";
 import style_css from './style.module.css'
 import {Link} from "react-router-dom";
+import Loading from "../../components/Loading";
 
 export default function Crear_Raza() {
+    const [loading,setloading]=useState(true)
     const [datos, setDatos] = useState({
         name: '',
         minimoAltura: '',
@@ -143,7 +145,12 @@ export default function Crear_Raza() {
         }
     }, [datos, errorDatos, errorSelectBD, selectBD, disableBtn])
     ///////////
+    setTimeout(()=>{
+        setloading(false)
+    },3000)
+    ////////////
     return (<>
+        {loading?<Loading/>:null}
         <div className={style_css.titleNav}>
             <h1>NEW DOG</h1>
             <Link className={style_css.link} to={'/My_Dogs'}>MY DOGS</Link>

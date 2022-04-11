@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {getAllDogs, getDogId} from "../../redux/actions";
 import {Link, useParams} from "react-router-dom";
 import style_css from "./style.module.css";
+import Loading from "../../components/Loading";
 
 export default function Detalle() {
+    const [loading,setloading]=useState(true)
     const urldata = useParams();
     const dispatch = useDispatch();
     const dogRedux = useSelector((state) => state.dog);
@@ -19,9 +21,13 @@ export default function Detalle() {
             datoid = item
         }
     })
-
-
+    ////Loading
+    setTimeout(()=>{
+        setloading(false)
+    },3000)
+    /////
     return (<>
+        {loading?<Loading/>:null}
         <div className={style_css.titleNav}>
             <h1>DETALLE {urldata.id}</h1>
             <Link className={style_css.link} to={'/My_Dogs'}>MY DOGS</Link>

@@ -7,10 +7,12 @@ import Filtro_Select from "../../components/Filtro_Select";
 import Search from "../../components/Search";
 import {Link} from "react-router-dom";
 import style_css from './styles.module.css'
+import Loading from "../../components/Loading";
 
 const Principal = () => {
     ///UseState
     const [dbDogs, setDbDogs] = useState(1)
+    const [loading,setloading]=useState(true)
     ///Dispatch reducer
     const dispatch = useDispatch();
     /////Reducer
@@ -41,8 +43,14 @@ const Principal = () => {
         }
         return contadorArr
     }
+
+    setTimeout(()=>{
+        setloading(false)
+    },3000)
     ////////////////////////////////////////////
     return (<>
+        {loading?<Loading/>:null}
+
         <div className={style_css.titleNav}>
             <h1>MY DOGS</h1>
         </div>

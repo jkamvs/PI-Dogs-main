@@ -74,5 +74,5 @@
     position: absolute;
     right: 10%;
     bottom: 15%;
-
+    z-index: 3;
 }
