@@ -112,11 +112,11 @@ const rootReducer = (state = initialState, action) => {
             const perroFil = [...state.dogs]
 
             if (action.payload === 'All weight') {
-                const allDogsTres = [...state.createTempFilter];
+                //const allDogsTres = [...state.createTempFilter];
                 return {
                     ...state,
-                    dogs: allDogsTres,
-                    tempFilter: allDogsTres,
+                    dogs: perroFil,
+                    tempFilter: perroFil,
                 }
             } else {
                 metricoDatos(perroFil, action.payload)

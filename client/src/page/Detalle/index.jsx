@@ -17,7 +17,7 @@ export default function Detalle() {
     }, [dispatch])
     let datoid = {};
     alldogs.forEach(item => {
-        if (item.id === urldata.id) {
+        if (item.id == urldata.id) {
             datoid = item
         }
     })
@@ -26,10 +26,11 @@ export default function Detalle() {
         setloading(false)
     },3000)
     /////
+
     return (<>
         {loading?<Loading/>:null}
         <div className={style_css.titleNav}>
-            <h1>DETALLE {urldata.id}</h1>
+            <h1>DETALLE</h1>
             <Link className={style_css.link} to={'/My_Dogs'}>MY DOGS</Link>
         </div>
         <div className={style_css.container}>

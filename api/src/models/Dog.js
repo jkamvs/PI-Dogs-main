@@ -17,6 +17,7 @@ module.exports = (sequelize) => {
       },
       height: {
         type: DataTypes.STRING
+
       },
       weight: {
         type: DataTypes.STRING

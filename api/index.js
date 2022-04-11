@@ -18,13 +18,13 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { dogsTems } = require("./src/controllers/temperamento.controllers.js");
+//const { dogsTems } = require("./src/controllers/temperamento.controllers.js");
 const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {///apagado
   server.listen(3001, () => {
-    dogsTems();
+    //dogsTems();
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });
