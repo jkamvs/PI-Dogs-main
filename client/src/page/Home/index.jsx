@@ -5,19 +5,11 @@ import style_css from './style.module.css'
 
 export default function index() {
     return (<div className={style_css.container}>
-        <div className={style_css.izquierda}>
-            <div className={style_css.izquierdaArriba}>
+        <img className={style_css.fondo} src={require('../../Recurso_kawai/perro-Kenneth-02.png')} alt={'fondo'}/>
+        <h1 className={style_css.title}>Bienvenido</h1>
+        <Link to="/My_Dogs" className={style_css.card}>
+            <img  src={require('../../Recurso_kawai/perro-Kenneth-05.png')} alt={'Diario'}/>
+        </Link>
 
-            </div>
-            <div className={style_css.izquierdaAbajo}></div>
-
-        </div>
-        <div className={style_css.derecha}>
-            <div className={style_css.derechaArriba}></div>
-            <div className={style_css.derechaAbajo}></div>
-        </div>
-        <div className={style_css.card}>
-            <Link to="/My_Dogs">Bienvenido</Link>
-        </div>
     </div>);
 }

@@ -104,8 +104,15 @@
     margin: 10px 0px 0px 0px;
 }
 .containerDetalle{
-    width: 50%;
-    background-color: #c1c0c1;
+    width: 50%;border: 1px solid #B8860B;
+    background-image: url("../../Recurso_kawai/perro-Kenneth-03.png") ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     padding: 30px;
 }
-
+.sello{
+    width: 10%;
+    position: absolute;
+    right: 4%;
+    bottom: 20%;
+}

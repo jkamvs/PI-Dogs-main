@@ -69,3 +69,10 @@
     padding-left: 30px;
     font-weight: 400;
 }
+.sello{
+    width: 10%;
+    position: absolute;
+    right: 10%;
+    bottom: 15%;
+
+}

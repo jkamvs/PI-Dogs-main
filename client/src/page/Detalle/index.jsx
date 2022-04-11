@@ -42,6 +42,7 @@ export default function Detalle() {
                     <p className={style_css.data}>Height: {dogRedux.height} cm</p>
                     <br/>
                     <p className={style_css.data}>Life {dogRedux.life_span}año.</p>
+                    <img className={style_css.sello} src={require('../../Recurso_kawai/perro-Kenneth-04.png')} alt={'Sello'}/>
                 </div>
 
             </div>

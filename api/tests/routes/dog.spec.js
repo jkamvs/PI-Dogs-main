@@ -10,7 +10,7 @@ const dog = {
 };
 
 describe('Videogame routes', () => {
-  before(() => conn.authenticate()
+  before(async () => await conn.authenticate()
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   }));
@@ -21,4 +21,9 @@ describe('Videogame routes', () => {
       agent.get('/dogs').expect(200)
     );
   });
+  describe('GET /dogs/:idRaza',()=>{
+    it('should get 200',()=>{
+      app.get('/dogs/1').expect(200)
+    })
+  })
 });

@@ -39,34 +39,30 @@ export default function Crear_Raza() {
     }
     /** CREANDO LA FUNCION PARA VALIDAR ERRORES */
     const validate = (datos) => {
-        let errors ={};
-        
-        if(!datos.name) errors.name = 'Necesitamos colocar un raza a tu perro';
-        if(/[1-9]/.test(datos.name)) errors.name = 'No se permite numeros';
-        if(/[^\w\s]/.test(datos.name)) errors.name = 'No se permite caracter';
-        if(datos.minimoAltura < 5) errors.minimoAltura='Necesita colocar la altura minima';
-        if(datos.maximoAltura !== '' && +datos.minimoAltura >= +datos.maximoAltura ) errors.minimoAltura = 'El valor debe de ser menor al maximo'
-        if(datos.minimoPeso < 5) errors.minimoPeso='Necesita colocar el peso minima';
-        if(datos.maximoPeso !== '' && +datos.minimoPeso >= +datos.maximoPeso ) errors.maximoPeso = 'El valor debe de ser menor al maximo'
-        if(datos.minimoLifeSpan < 5) errors.minimoLifeSpan='Necesita colocar la vida minima';
-        if(datos.maximoLifeSpan !== '' && +datos.minimoLifeSpan >= +datos.maximoLifeSpan ) errors.minimoLifeSpan = 'El valor debe de ser menor al maximo'
+        let errors = {};
+
+        if (!datos.name) errors.name = 'Necesitamos colocar un raza a tu perro';
+        if (/[1-9]/.test(datos.name)) errors.name = 'No se permite numeros';
+        if (/[^\w\s]/.test(datos.name)) errors.name = 'No se permite caracter';
+        if (datos.minimoAltura < 5) errors.minimoAltura = 'Necesita colocar la altura minima';
+        if (datos.maximoAltura !== '' && +datos.minimoAltura >= +datos.maximoAltura) errors.minimoAltura = 'El valor debe de ser menor al maximo'
+        if (datos.minimoPeso < 5) errors.minimoPeso = 'Necesita colocar el peso minima';
+        if (datos.maximoPeso !== '' && +datos.minimoPeso >= +datos.maximoPeso) errors.maximoPeso = 'El valor debe de ser menor al maximo'
+        if (datos.minimoLifeSpan < 5) errors.minimoLifeSpan = 'Necesita colocar la vida minima';
+        if (datos.maximoLifeSpan !== '' && +datos.minimoLifeSpan >= +datos.maximoLifeSpan) errors.minimoLifeSpan = 'El valor debe de ser menor al maximo'
 
         return errors;
     }
 
-  
 
     /**HANDLERS PARA LOS INPUTS, SETEANDO EL VALOR DEL ESTADO */
     const handleinputChange = (e) => {
-       setDatos({
-           ...datos,
-           [e.target.name]: mayusculaSearch(e.target.value)
-       })
-       setErrorDatos(validate({
-               ...datos,
-               [e.target.name]: mayusculaSearch(e.target.value)
-           })
-       )
+        setDatos({
+            ...datos, [e.target.name]: mayusculaSearch(e.target.value)
+        })
+        setErrorDatos(validate({
+            ...datos, [e.target.name]: mayusculaSearch(e.target.value)
+        }))
     }
 
     /**Handler temperaments */
@@ -118,7 +114,7 @@ export default function Crear_Raza() {
     let listoData = {
         name: datos.name, height: heightData, weight: weightData, life_span: lifeSpanData, temp: selectBD,
     }
-    
+
     /**Handle para el boton */
     const handleData = (e) => {
         e.preventDefault();
@@ -134,30 +130,18 @@ export default function Crear_Raza() {
             maximoLifeSpan: ''
         })
         setSelect([]);
-     
+
     }
     //////////////////////////////
     useEffect(() => {
-        if (datos.name === '' ||
-            datos.minimoAltura === '' ||
-            datos.minimoPeso === '' ||
-            datos.minimoLifeSpan === '' ||
-            selectBD.length === 0 ||
-            errorDatos.hasOwnProperty('name') ||
-            errorDatos.hasOwnProperty('minimoAltura') ||
-            errorDatos.hasOwnProperty('maximoAltura') ||
-            errorDatos.hasOwnProperty('maximoPeso') ||
-            errorDatos.hasOwnProperty('minimoPeso') ||
-            errorDatos.hasOwnProperty('maximoLifeSpan') ||
-            errorDatos.hasOwnProperty('minimoLifeSpan')
+        if (datos.name === '' || datos.minimoAltura === '' || datos.minimoPeso === '' || datos.minimoLifeSpan === '' || selectBD.length === 0 || errorDatos.hasOwnProperty('name') || errorDatos.hasOwnProperty('minimoAltura') || errorDatos.hasOwnProperty('maximoAltura') || errorDatos.hasOwnProperty('maximoPeso') || errorDatos.hasOwnProperty('minimoPeso') || errorDatos.hasOwnProperty('maximoLifeSpan') || errorDatos.hasOwnProperty('minimoLifeSpan')
 
-            ) {
+        ) {
             setDisableBtn(true)
         } else {
             setDisableBtn(false)
         }
     }, [datos, errorDatos, errorSelectBD, selectBD, disableBtn])
-
     ///////////
     return (<>
         <div className={style_css.titleNav}>
@@ -167,121 +151,110 @@ export default function Crear_Raza() {
         <div className={style_css.flexContainer}>
             <div className={style_css.form}>
                 {/*Nombre del perron*/}
-                <label>
-                    <p>Name:</p>
+                <label>Name:</label>
+                <input
+                    className={style_css.inputText}
+                    type='text'
+                    name='name'
+                    value={datos.name}
+                    placeholder='Name Dog'
+                    onChange={(e) => handleinputChange(e)}
+                />
+                {errorDatos.name && <p className={style_css.alertMensaje}>{errorDatos.name}</p>}
+                {/*Nombre del perron*/}
+                <label>Altura:</label>
+                <div className={style_css.inputMINMAX}>
                     <input
-                        className={style_css.inputText}
-                        type='text'
-                        name='name'
-                        value={datos.name}
-                        placeholder='Name Dog'
+                        className={style_css.MINMAX}
+                        type='number'
+                        id='minimoAltura'
+                        name="minimoAltura"
+                        value={datos.minimoAltura}
                         onChange={(e) => handleinputChange(e)}
+                        placeholder={'MIN'}
                     />
-                    {errorDatos.name && <p className={style_css.alertMensaje}>{errorDatos.name}</p>}
-                </label>
+                    <input
+                        className={style_css.MINMAX}
+                        type='number'
+                        id='maximoAltura'
+                        name="maximoAltura"
+                        value={datos.maximoAltura}
+                        onChange={(e) => handleinputChange(e)}
+                        placeholder={'MAX'}
+                    />
+                </div>
+                {errorDatos.minimoAltura && <p className={style_css.alertMensaje}>{errorDatos.minimoAltura}</p>}
+                {errorDatos.maximoAltura && <p className={style_css.alertMensaje}>{errorDatos.maximoAltura}</p>}
                 {/*Nombre del perron*/}
-                <label>
-                    <p>Altura:</p>
-                    <div className={style_css.inputMINMAX}>
-                        <input
-                            className={style_css.MINMAX}
-                            type='number'
-                            id='minimoAltura'
-                            name="minimoAltura"
-                            value={datos.minimoAltura}
-                            onChange={(e) => handleinputChange(e)}
-                            placeholder={'MIN'}
-                        />
-                        <input
-                            className={style_css.MINMAX}
-                            type='number'
-                            id='maximoAltura'
-                            name="maximoAltura"
-                            value= {datos.maximoAltura}
-                            onChange={(e) => handleinputChange(e)}
-                            placeholder={'MAX'}
-                        />
-                    </div>
-                    {errorDatos.minimoAltura && <p className={style_css.alertMensaje}>{errorDatos.minimoAltura}</p>}
-                    {errorDatos.maximoAltura && <p className={style_css.alertMensaje}>{errorDatos.maximoAltura}</p>}
-                 
-                </label>
-                {/*Nombre del perron*/}
-                <label>
-                    <p>Peso:</p>
-                    <div className={style_css.inputMINMAX}>
-                        <input
-                            className={style_css.MINMAX}
-                            type={'number'}
-                            id={'minimoPeso'}
-                            name={"minimoPeso"}
-                            value={datos.minimoPeso}
-                            onChange={(e) => handleinputChange(e)}
-                            placeholder={'MIN'}
-                        />
-                        <input
-                            className={style_css.MINMAX}
-                            type={'number'}
-                            id={'maximoPeso'}
-                            name={"maximoPeso"}
-                            value={datos.maximoPeso}
-                            onChange={(e) => handleinputChange(e)}
-                            placeholder={'MAX'}
-                        />
-                    </div>
-                    {errorDatos.minimoPeso && <p className={style_css.alertMensaje}>{errorDatos.minimoPeso}</p>}
-                    {errorDatos.maximoPeso && <p className={style_css.alertMensaje}>{errorDatos.maximoPeso}</p>}
-                </label>
-                <label>
-                    <p>Años de vida:</p>
-                    <div className={style_css.inputMINMAX}>
-                        <input
-                            className={style_css.MINMAX}
-                            type={'number'}
-                            id={'minimoLifeSpan'}
-                            name={"minimoLifeSpan"}
-                            value={datos.minimoLifeSpan}
-                            onChange={(e) => handleinputChange(e)}
-                            placeholder={'MIN'}
-                        />
-                        <input
-                            className={style_css.MINMAX}
-                            type={'number'}
-                            id={'maximoLifeSpan'}
-                            name={"maximoLifeSpan"}
-                            value={datos.maximoLifeSpan}
-                            onChange={(e) => handleinputChange(e)}
-                            placeholder={'MAX'}
-                        />
-                    </div>
-                    {errorDatos.minimoLifeSpan && <p className={style_css.alertMensaje}>{errorDatos.minimoLifeSpan}</p>}
-                    {errorDatos.maximoLifeSpan && <p className={style_css.alertMensaje}>{errorDatos.maximoLifeSpan}</p>}
-                </label>
-                <label>
-                    <p>Temperamento:</p>
-                    <select
-                        defaultValue={'All Temp'}
-                        className={style_css.select}
-                        name={'temperamentos'}
-                        onChange={(e) => handleTemp(e)}>
-                        <option value='All Temp' disabled>All Temperament</option>
-                        {tempRedux?.map(item => (<option
-                            key={item.name}
-                            value={item.name}
-                        >
-                            {item.name}
-                        </option>))}
-                    </select>
-                    <div className={style_css.flex}>
-                        {selectBD?.map((item) => (<p
-                            className={style_css.p}
-                            key={item}
-                        >
-                            {item}
-                        </p>))}
-                    </div>
-                    {errorSelectBD && <p className={style_css.alertMensaje}>{errorSelectBD}</p>}
-                </label>
+                <label>Peso:</label>
+                <div className={style_css.inputMINMAX}>
+                    <input
+                        className={style_css.MINMAX}
+                        type={'number'}
+                        id={'minimoPeso'}
+                        name={"minimoPeso"}
+                        value={datos.minimoPeso}
+                        onChange={(e) => handleinputChange(e)}
+                        placeholder={'MIN'}
+                    />
+                    <input
+                        className={style_css.MINMAX}
+                        type={'number'}
+                        id={'maximoPeso'}
+                        name={"maximoPeso"}
+                        value={datos.maximoPeso}
+                        onChange={(e) => handleinputChange(e)}
+                        placeholder={'MAX'}
+                    />
+                </div>
+                {errorDatos.minimoPeso && <p className={style_css.alertMensaje}>{errorDatos.minimoPeso}</p>}
+                {errorDatos.maximoPeso && <p className={style_css.alertMensaje}>{errorDatos.maximoPeso}</p>}
+                <label>Años de vida:</label>
+                <div className={style_css.inputMINMAX}>
+                    <input
+                        className={style_css.MINMAX}
+                        type={'number'}
+                        id={'minimoLifeSpan'}
+                        name={"minimoLifeSpan"}
+                        value={datos.minimoLifeSpan}
+                        onChange={(e) => handleinputChange(e)}
+                        placeholder={'MIN'}
+                    />
+                    <input
+                        className={style_css.MINMAX}
+                        type={'number'}
+                        id={'maximoLifeSpan'}
+                        name={"maximoLifeSpan"}
+                        value={datos.maximoLifeSpan}
+                        onChange={(e) => handleinputChange(e)}
+                        placeholder={'MAX'}
+                    />
+                </div>
+                {errorDatos.minimoLifeSpan && <p className={style_css.alertMensaje}>{errorDatos.minimoLifeSpan}</p>}
+                {errorDatos.maximoLifeSpan && <p className={style_css.alertMensaje}>{errorDatos.maximoLifeSpan}</p>}
+                <label>Temperamento:</label>
+                <select
+                    defaultValue={'All Temp'}
+                    className={style_css.select}
+                    name={'temperamentos'}
+                    onChange={(e) => handleTemp(e)}>
+                    <option value='All Temp' disabled>All Temperament</option>
+                    {tempRedux?.map(item => (<option
+                        key={item.name}
+                        value={item.name}
+                    >
+                        {item.name}
+                    </option>))}
+                </select>
+                <div className={style_css.flex}>
+                    {selectBD?.map((item) => (<p
+                        className={style_css.p}
+                        key={item}
+                    >
+                        {item}
+                    </p>))}
+                </div>
+                {errorSelectBD && <p className={style_css.alertMensaje}>{errorSelectBD}</p>}
                 <input
                     className={disableBtn ? style_css.btnactivo : style_css.btn}
                     type={'submit'}
@@ -306,6 +279,10 @@ export default function Crear_Raza() {
                 </p>
                 <br/>
                 <p>Temperamentos: {news}</p>
+                {disableBtn ? null :
+                    <img className={style_css.sello} src={require('../../Recurso_kawai/perro-Kenneth-04.png')}
+                         alt={'sello'}/>}
+
             </div>
         </div>
     </>)

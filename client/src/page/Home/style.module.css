@@ -1,35 +1,18 @@
 .container{
-    display: flex;
     width: 100%;
     height: 100vh;
+    display: flex;
 }
-.izquierda{
-    width: 50%;
-
-}
-.izquierdaArriba{
+.fondo{
     width: 100%;
-    height: 50vh;
-    background-color: #B8860B;
+    height: 100%;
 }
-.izquierdaAbajo{
-    width: 100%;
-    height: 50vh;
-    background-color: #FFFFFF;
-}
-.derecha{
-    width: 50%;
-}
-.derechaArriba{
-    width: 100%;
-    height: 50vh;
-    background-color: #FFFFFF;
-}
-
-.derechaAbajo{
-    width: 100%;
-    height: 50vh;
-    background-color: #B8860B;
+.title{
+    position: absolute;
+    font-family: "Roboto Light";
+    font-size: 40px;
+    top: 10%;
+    left: 43%;
 }
 .card{
     width: 300px;
@@ -37,5 +20,9 @@
     position: absolute;
     top: 26%;
     left: 39%;
-    background-color: #c1c0c1;
+
+}
+.card img{
+    width: 100%;
+    height: 100%;
 }
