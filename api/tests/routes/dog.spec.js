@@ -16,29 +16,40 @@ describe('Videogame routes', () => {
         }));
     beforeEach(() => Dog.sync({force: true})
         .then(() => Dog.create(dog)));
-    describe('GET /dogs', () => {
-        it('should get 200', () =>
-            agent.get('/dogs').expect(200)
-        );
-    });
-    describe('GET /dogs?name=Kenneth Mazuelos', () => {
-        it('should get 200', () =>
-            agent.get('/dogs?name=Kenneth Mazuelos').expect(200)
-        )
-    })
-    describe('GET /dogs?name=Pugs', () => {
-        it('muestra el nombre Pugs', function () {
-                return agent.get('/dogs?name=Pugss')
-                    .expect(200)
-                    .expect("content-Type",/json/)
-                    .expect(function(res){
-                        expect(res.body).eql({
-                            "Error": "La raza no existe"
-                        });
-                    })
 
-            }
-        )
-    })
-
+    it('should get 200', () =>
+        agent.get('/dogs')
+            .expect('content-Type', /json/)
+            .expect(200)
+    );
+    it('should get 200', () =>
+        agent.get('/dogs?name=Kenneth Mazuelos')
+            .expect('content-Type', /json/)
+            .expect(200)
+    )
+    it('No encuentra la raza y manda un mensaje de Erro atravez de un objeto', function () {
+            return agent.get('/dogs?name=Pugss')
+                .expect(200)
+                .expect("content-Type", /json/)
+                .expect(function (res) {
+                    expect(res.body).eql({
+                        "Error": "La raza no existe"
+                    });
+                })
+        }
+    )
+    it('should get 200 temper', () =>
+        agent.get('/temperament')
+            .expect('content-Type', /json/)
+            .expect(200)
+    )
+    it('create a new data',()=>
+        agent.post("/dog")
+            .send({	"name":"kenneth",
+                "height":"asda",
+                "weight":"asdadsa",
+                "life_span":"11 years",
+                "temp":["Bossy","Loyal"]})
+            .expect(201)
+    )
 });

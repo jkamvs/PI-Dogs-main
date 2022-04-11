@@ -1,4 +1,4 @@
-const { Dog, conn } = require('../../src/db.js');
+const { Dog,Temperamento, conn } = require('../../src/db.js');
 const { expect } = require('chai');
 
 describe('Dog model', () => {
@@ -8,15 +8,26 @@ describe('Dog model', () => {
     }));
   describe('Validators', () => {
     beforeEach(() => Dog.sync({ force: true }));
-    describe('name', () => {
+    describe('Dog', () => {
       it('should throw an error if name is null', (done) => {
         Dog.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
+
       it('should work when its a valid name', () => {
         Dog.create({ name: 'Pug' });
       });
+    });
+    describe('Temperamento', () => {
+      it('should throw an error if name is null',(done)=>{
+        Temperamento.create({})
+            .then(()=>done(new Error('It requires a valid name de temperamento')))
+            .catch(()=>done());
+      });
+      it('should work when its a valid name',()=>{
+        Temperamento.create({name:'Angry'})
+      })
     });
   });
 });
