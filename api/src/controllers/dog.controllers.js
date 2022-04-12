@@ -41,7 +41,7 @@ let databaseMejoradoDB = async () => {
             height: data[i].height,
             weight: data[i].weight,
             life_span: data[i].life_span,
-            temperament: []
+            temperament: []////===>>>temperamentos[{name:molesto},{name:alegre}]
         }
         let temp = data[i].temperamentos;
         temp.forEach(item => {

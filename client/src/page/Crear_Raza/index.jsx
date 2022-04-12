@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import Loading from "../../components/Loading";
 
 export default function Crear_Raza() {
-    const [loading,setloading]=useState(true)
+    const [loading, setloading] = useState(true)
     const [datos, setDatos] = useState({
         name: '',
         minimoAltura: '',
@@ -133,6 +133,12 @@ export default function Crear_Raza() {
         })
         setSelect([]);
 
+    }/////////////////////////////
+    const handleDelete = (e) => {
+        let newdato =[...selectBD]
+        let position = newdato.indexOf(e.target.innerHTML);
+        newdato.splice(position, 1)
+        setSelect(newdato);
     }
     //////////////////////////////
     useEffect(() => {
@@ -145,12 +151,12 @@ export default function Crear_Raza() {
         }
     }, [datos, errorDatos, errorSelectBD, selectBD, disableBtn])
     ///////////
-    setTimeout(()=>{
+    setTimeout(() => {
         setloading(false)
-    },3000)
+    }, 3000)
     ////////////
     return (<>
-        {loading?<Loading/>:null}
+        {loading ? <Loading/> : null}
         <div className={style_css.titleNav}>
             <h1>NEW DOG</h1>
             <Link className={style_css.link} to={'/My_Dogs'}>MY DOGS</Link>
@@ -257,6 +263,7 @@ export default function Crear_Raza() {
                     {selectBD?.map((item) => (<p
                         className={style_css.p}
                         key={item}
+                        onClick={(e) => handleDelete(e)}
                     >
                         {item}
                     </p>))}

@@ -6,6 +6,7 @@ import style_css from './styles.module.css'
 export default function Filtro_Select({setDbDogs}) {
     const [abc,setabc]= useState('All Data Base')
     const [weight,setweight]= useState('All weight')
+    const [temp,setTemp]=useState('All Temp')
     ///Dispatch reducer
     const dispatch = useDispatch();
     /////Reducer
@@ -21,6 +22,7 @@ export default function Filtro_Select({setDbDogs}) {
         e.preventDefault();
         dispatch(getTempFilter(e.target.value))
         setDbDogs(1)
+        setTemp(e.target.value)
     }
     const handleRaza = (e) => {
         e.preventDefault();
@@ -28,6 +30,7 @@ export default function Filtro_Select({setDbDogs}) {
         setDbDogs(1)
         setabc('All Data Base')
         setweight('All weight')
+        setTemp('All Temp')
     }
     const handleAlphabetical = (e) => {
         e.preventDefault();
@@ -44,7 +47,7 @@ export default function Filtro_Select({setDbDogs}) {
         setweight(e.target.value)
     }
     return (<div className={style_css.flex}>
-            <select className={style_css.select} name='Temp' onChange={(e) => handleTemp(e)}>
+            <select className={style_css.select} name='Temp' value={temp} onChange={(e) => handleTemp(e)}>
                 <option value='All Temp'>All Temperament</option>
                 {tempRedux?.map(item => (<option key={item.name} value={item.name}>{item.name}</option>))}
             </select>
@@ -62,7 +65,6 @@ export default function Filtro_Select({setDbDogs}) {
                 <option value={'All weight'}>All Weight</option>
                 <option value={'Weight 1 - 9'}>Weight 1 - 9</option>
                 <option value={'Weight 9 - 1'}>Weight 9 - 1</option>
-   \
             </select>
         </div>
 

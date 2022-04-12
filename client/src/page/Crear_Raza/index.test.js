@@ -15,12 +15,10 @@ describe('<Crear_Raza/>', () => {
         return container
     };
     it('El form debe tener un label que diga: "Name:"', () => {
-
         const element = dato().querySelectorAll('label')[0]
         expect(element.innerHTML).toBe('Name:');
     });
     it('El form debe tener un input con name "name" y type "text"', () => {
-
         const element = dato().querySelectorAll('input')[0]
         expect(element.type).toBe('text');
         expect(element.name).toBe('name');
@@ -67,5 +65,4 @@ describe('<Crear_Raza/>', () => {
         expect(element.type).toBe('number');
         expect(element.name).toBe('maximoLifeSpan');
     });
-
 });
