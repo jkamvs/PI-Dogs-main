@@ -3,7 +3,7 @@ const axios = require("axios");
 export const urlDogs = async () => {
     try {
         return await axios
-            .get("http://localhost:3001/dogs")
+            .get("/dogs")
             .then((res) => res.data);
     } catch (error) {
         console.log(error);
@@ -13,7 +13,7 @@ export const urlDogs = async () => {
 export const urlDogsId = async (id) => {
     try {
         return await axios
-            .get(`http://localhost:3001/dogs/${id}`)
+            .get(`/dogs/${id}`)
             .then((res) => res.data)
             .catch(e => `El valor ingresado no es el correcto ${e}`)
     } catch (error) {
@@ -24,7 +24,7 @@ export const urlDogsId = async (id) => {
 export const urlDogsRaza = async (raza) => {
     try {
         return await axios
-            .get(`http://localhost:3001/dogs?name=${raza}`)
+            .get(`/dogs?name=${raza}`)
             .then((res) => res.data);
     } catch (error) {
         console.log(error);
@@ -34,7 +34,7 @@ export const urlDogsRaza = async (raza) => {
 export const urlTemp = async () => {
     try {
         return await axios
-            .get("http://localhost:3001/temperament")
+            .get("/temperament")
             .then((res) => res.data);
     } catch (error) {
         console.log(error);
@@ -126,7 +126,7 @@ export const metricoDatos = (url, valor) => {
 export const addDogDb = ({listoData}) => {
     try {
         return axios
-            .post('http://localhost:3001/dog', {
+            .post('/dog', {
                 name: listoData.name,
                 height: listoData.height,
                 weight: listoData.weight,
